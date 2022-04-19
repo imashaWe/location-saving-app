@@ -1,12 +1,13 @@
 package com.imasha.locationserver
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.imasha.locationserver.databinding.FragmentAddLocationBinding
 import com.imasha.locationserver.models.LocationData
 import com.imasha.locationserver.viewModels.LocationViewModel
@@ -47,10 +48,17 @@ class AddLocationFragment : Fragment() {
 
     private fun saveLocation() {
         val name = binding.editTextLocationName.text.toString()
-        val lat = binding.editTextLat.text.toString().toLong()
-        val long = binding.editTextLat.text.toString().toLong()
-        locationViewModel.addNewLocation(LocationData(null, name, lat, long))
-        Log.i(TAG, "Location saved")
+        val lat = binding.editTextLat.text.toString()
+        val long = binding.editTextLat.text.toString()
+
+        if (name.isNullOrEmpty() || lat.isNullOrEmpty() || long.isNullOrEmpty()) {
+            Toast.makeText(context, "Some details are missing!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        locationViewModel.addNewLocation(LocationData(null, name, lat.toLong(), long.toLong()))
+        Toast.makeText(context, "New location successfully added!", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_add_location_to_home)
     }
 
     override fun onDestroyView() {

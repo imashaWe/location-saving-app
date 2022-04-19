@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
         locationViewModel = ViewModelProvider(this)[LocationViewModel::class.java]
 
         binding.addNewFab.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_home_to_add_location)
         }
 
         initData()
