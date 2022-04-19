@@ -49,16 +49,16 @@ class AddLocationFragment : Fragment() {
     private fun saveLocation() {
         val name = binding.editTextLocationName.text.toString()
         val lat = binding.editTextLat.text.toString()
-        val long = binding.editTextLat.text.toString()
+        val long = binding.editTextLog.text.toString()
 
         if (name.isNullOrEmpty() || lat.isNullOrEmpty() || long.isNullOrEmpty()) {
             Toast.makeText(context, "Some details are missing!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        locationViewModel.addNewLocation(LocationData(null, name, lat.toLong(), long.toLong()))
+        locationViewModel.addNewLocation(LocationData(null, name, lat.toDouble(), long.toDouble()))
         Toast.makeText(context, "New location successfully added!", Toast.LENGTH_SHORT).show()
-        findNavController().navigate(R.id.action_add_location_to_home)
+        findNavController().navigate(R.id.action_AddLocationFragment_to_HomeFragment)
     }
 
     override fun onDestroyView() {

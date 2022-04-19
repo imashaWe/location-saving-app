@@ -13,7 +13,10 @@
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_home_to_add_location"
+            android:id="@+id/action_HomeFragment_to_mapViewFragment"
+            app:destination="@id/mapViewFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_AddLocationFragment"
             app:destination="@id/AddLocationFragment" />
     </fragment>
     <fragment
@@ -21,9 +24,17 @@
         android:name="com.imasha.locationserver.AddLocationFragment"
         android:label="@string/add_location_fragment_label"
         tools:layout="@layout/fragment_add_location">
-
         <action
-            android:id="@+id/action_add_location_to_home"
+            android:id="@+id/action_AddLocationFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapViewFragment"
+        android:name="com.imasha.locationserver.MapViewFragment"
+        android:label="@string/map"
+        tools:layout="@layout/fragment_map_view">
+        <action
+            android:id="@+id/action_mapViewFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
 </navigation>

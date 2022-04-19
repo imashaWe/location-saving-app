@@ -1,7 +1,6 @@
 package com.imasha.locationserver
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +40,7 @@ class HomeFragment : Fragment() {
         locationViewModel = ViewModelProvider(this)[LocationViewModel::class.java]
 
         binding.addNewFab.setOnClickListener {
-            findNavController().navigate(R.id.action_home_to_add_location)
+            findNavController().navigate(R.id.action_HomeFragment_to_AddLocationFragment)
         }
 
         initData()
@@ -54,7 +53,6 @@ class HomeFragment : Fragment() {
 
         locationViewModel.allLocations.observe(viewLifecycleOwner) {
             it.let {
-                it[0].name?.let { it1 -> Log.i("Test", it1) }
                 adapter.setData(it)
             }
         }

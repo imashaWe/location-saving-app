@@ -1,10 +1,12 @@
 package com.imasha.locationserver.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.imasha.locationserver.R
 import com.imasha.locationserver.models.LocationData
@@ -28,6 +30,13 @@ class LocationListAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = dataset[position]
         holder.title.text = data.name
+        val bundle = Bundle()
+        bundle.putString("locationName", data.name)
+        bundle.putDouble("latitude", data.latitude!!)
+        bundle.putDouble("longitude", data.longitude!!)
+        holder.listTitle.setOnClickListener {
+            it.findNavController().navigate(R.id.action_HomeFragment_to_mapViewFragment, bundle)
+        }
     }
 
     override fun getItemCount(): Int {
