@@ -4,5 +4,6 @@
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment_label">Location Server</string>
     <string name="add_location_fragment_label">Add Location</string>
+    <string name="add_new_location">Add New Location</string>
 
 </resources>
