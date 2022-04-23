@@ -14,4 +14,14 @@ class LocationDataRepository(private val locationDao: LocationDao) {
         locationDao.add(locationData)
     }
 
+    @WorkerThread
+    suspend fun delete(locationData: LocationData) {
+        locationDao.delete(locationData)
+    }
+
+    @WorkerThread
+    suspend fun update(locationData: LocationData) {
+        locationDao.update(locationData)
+    }
+
 }

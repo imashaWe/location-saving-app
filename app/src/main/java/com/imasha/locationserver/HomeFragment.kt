@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
 
     private fun initData() {
         val locationListView: RecyclerView = binding.locationListView
-        val adapter = LocationListAdapter()
+        val adapter = LocationListAdapter(locationViewModel)
         locationListView.adapter = adapter
 
         locationViewModel.allLocations.observe(viewLifecycleOwner) {

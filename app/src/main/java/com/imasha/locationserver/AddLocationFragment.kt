@@ -28,6 +28,8 @@ class AddLocationFragment : Fragment() {
 
     private lateinit var locationViewModel: LocationViewModel
 
+    private var id: Long? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +44,13 @@ class AddLocationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         locationViewModel = ViewModelProvider(this)[LocationViewModel::class.java]
+        val args = arguments
+        if (args != null) {
+            id = args.getLong("id")
+            binding.editTextLocationName.setText(args.getString("locationName"))
+            binding.editTextLat.setText(args.getDouble("latitude").toString())
+            binding.editTextLog.setText(args.getDouble("longitude").toString())
+        }
         binding.buttonSave.setOnClickListener { saveLocation() }
 
     }
@@ -55,9 +64,17 @@ class AddLocationFragment : Fragment() {
             Toast.makeText(context, "Some details are missing!", Toast.LENGTH_SHORT).show()
             return
         }
+        val location = LocationData(id, name, lat.toDouble(), long.toDouble())
 
-        locationViewModel.addNewLocation(LocationData(null, name, lat.toDouble(), long.toDouble()))
-        Toast.makeText(context, "New location successfully added!", Toast.LENGTH_SHORT).show()
+        if (id == null) {
+            locationViewModel.addNewLocation(location)
+            Toast.makeText(context, "New location successfully added!", Toast.LENGTH_SHORT).show()
+        } else {
+            locationViewModel.updateLocation(location)
+            Toast.makeText(context, "Your Location successfully updated!", Toast.LENGTH_SHORT)
+                .show()
+        }
+
         findNavController().navigate(R.id.action_AddLocationFragment_to_HomeFragment)
     }
 

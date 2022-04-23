@@ -1,9 +1,6 @@
 package com.imasha.locationserver.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.imasha.locationserver.models.LocationData
 import kotlinx.coroutines.flow.Flow
 
@@ -14,5 +11,11 @@ interface LocationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun add(locationData: LocationData)
+
+    @Update
+    suspend fun update(locationData: LocationData)
+
+    @Delete
+    suspend fun delete(locationData: LocationData)
 
 }
